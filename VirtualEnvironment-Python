@@ -1,3 +1,4 @@
+0. Executar a mudança de politica do windows: "Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser" - Lembrar de modificar após o uso.
 1. Entrar no diretório raiz do projeto
 2. Criar ambiente: "python -m venv nome_do_ambiente"
 3. Habilitar ambiente: "meu_ambiente_virtual\Scripts\activate", ou em caso de linux: "source meu_ambiente_virtual/bin/activate"
