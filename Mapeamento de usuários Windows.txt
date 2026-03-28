@@ -1,0 +1,22 @@
+(
+"===== USUÁRIOS LOCAIS =====",
+(Get-LocalUser | Select-Object Name, Enabled | Format-Table | Out-String),
+
+"===== PERFIS EXISTENTES =====",
+(Get-CimInstance -Class Win32_UserProfile | Select-Object LocalPath),
+
+"===== GRUPOS LOCAIS =====",
+(Get-LocalGroup | Select-Object Name | Format-Table | Out-String),
+
+"===== USUÁRIOS PRESENTES EM CADA GRUPO =====",
+(Get-LocalGroup | ForEach-Object {
+    $g = $_.Name
+    "Grupo: $g"
+    try {
+        Get-LocalGroupMember -Group $g | Select-Object Name, ObjectClass, PrincipalSource | Format-Table | Out-String
+    } catch {
+        "  Falha ao obter membros."
+    }
+    ""
+})
+) | Out-File -FilePath ".\mapeamento_servidor.txt" -Encoding UTF8
